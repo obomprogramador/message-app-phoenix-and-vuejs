@@ -1,0 +1,24 @@
+name: Source Branch Validation
+
+on:
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR source branch
+        env:
+          TARGET: ${{ github.base_ref }}
+          SOURCE: ${{ github.head_ref }}
+        run: |
+          if [ "$TARGET" = "main" ] && [ "$SOURCE" != "staging" ]; then
+            echo "❌ PRs para main só podem vir de staging (recebido: $SOURCE)"
+            exit 1
+          fi
+          if [ "$TARGET" = "staging" ] && [ "$SOURCE" != "develop" ]; then
+            echo "❌ PRs para staging só podem vir de develop (recebido: $SOURCE)"
+            exit 1
+          fi
+          echo "✅ Source branch $SOURCE -> $TARGET é permitida"

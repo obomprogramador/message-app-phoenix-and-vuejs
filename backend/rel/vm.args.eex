@@ -1,0 +1,21 @@
+## Customize flags given to the VM: https://www.erlang.org/doc/man/erl.html
+## -mode/-name/-sname/-setcookie are configured via env vars, do not set them here.
+
+## Number of busy waiting schedulers, only use to disable busy waiting (0).
+## +sbwt none
+
+## Number of scheduler busy wait threshold after sleeping
+## +sbwtdcpu none
+## +sbwtdio none
+
+## Number of reductions before a context switch
+## +swct eager
+
+## Increase number of concurrent ports/locks
+## +e 15000
+
+## Set the number of schedulers (1-1024)
+## +S 2:2
+
+## Increase number of atoms
+## +t 5000000

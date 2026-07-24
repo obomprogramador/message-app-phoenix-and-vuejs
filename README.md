@@ -1,3 +1,7 @@
+<img width="1919" height="969" alt="Captura de tela de 2026-07-23 15-46-27" src="https://github.com/user-attachments/assets/247def6f-642d-48f9-a314-3b1936adc64a" />
+<img width="1919" height="969" alt="Captura de tela de 2026-07-23 15-46-35" src="https://github.com/user-attachments/assets/3244d860-e369-4244-87d5-ef5c13d05c43" />
+
+
 # Message App
 
 Aplicacao de mensagens com Phoenix + Vue 3.

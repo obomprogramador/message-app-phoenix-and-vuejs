@@ -63,12 +63,12 @@ ENV LC_ALL=en_US.UTF-8
 
 WORKDIR /app
 
-RUN chown -R nobody:root /app
-USER nobody
-
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/message_app ./
 COPY render-entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
+
+RUN chown -R nobody:root /app
+USER nobody
 
 ENV PHX_SERVER=true
 ENV PORT=4000

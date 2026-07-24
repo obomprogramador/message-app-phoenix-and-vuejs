@@ -38,5 +38,12 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base,
-    check_origin: false
+    check_origin:
+      System.get_env("PHX_ALLOWED_ORIGINS", "")
+      |> String.split(",", trim: true)
+      |> Enum.map(&String.trim/1)
+      |> case do
+        [] -> false
+        origins -> origins
+      end
 end

@@ -86,4 +86,28 @@ docker compose exec -e MIX_ENV=test backend mix coveralls
 
 # Ver IDs para testar conversas
 docker compose logs backend | grep "Para testar"
+
+## Demo ativa no Render
+
+O projeto esta disponivel em uma demo hospedada no **Render** (plano free).
+
+| Servico | URL |
+|---|---|
+| Frontend | https://message-app-frontend-w4bu.onrender.com |
+| Backend | https://message-app-backend-o3ly.onrender.com |
+| Health Check | https://message-app-backend-o3ly.onrender.com/api/health |
+
+### URLs para testar conversas
+
+Abra qualquer uma no navegador:
+
+```
+https://message-app-frontend-w4bu.onrender.com/c39296b5-a44f-4b09-9263-ab3ef92e879c  (@usuario.1)
+https://message-app-frontend-w4bu.onrender.com/7a114a97-0581-4890-94a3-d7a7e5e5e52c  (@usuario.2)
+https://message-app-frontend-w4bu.onrender.com/47c626fb-7bcd-4aca-89cb-ae67264924a9  (@usuario.3)
+```
+
+> **Atencao:** O plano free do Render suspende os servicos apos 15 minutos de inatividade.
+> Se as URLs acima nao estiverem funcionando, entre em contato com o desenvolvedor
+> para reativar o deploy no Render.
 ```

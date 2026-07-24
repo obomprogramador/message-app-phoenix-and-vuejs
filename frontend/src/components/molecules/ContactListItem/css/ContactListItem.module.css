@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.item {
+  @apply flex items-center gap-[14px] py-2.5 border-b border-[var(--bg-secondary)] transition-colors last:border-b-0;
+}
+
+.info {
+  @apply flex-1 min-w-0 flex flex-col gap-[2px];
+}
+
+.name {
+  @apply font-medium text-[15px] text-[var(--text-primary)];
+}
+
+.nickName {
+  @apply text-[13px] text-[var(--text-muted)];
+}
+
+.deleteBtn {
+  @apply bg-none border-none cursor-pointer text-[var(--text-muted)] p-1.5 rounded-full flex items-center justify-center transition-colors shrink-0 hover:bg-[var(--bg-secondary)] hover:text-[var(--dot-busy)];
+}

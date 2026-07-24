@@ -1,0 +1,83 @@
+ARG ELIXIR_VERSION=1.20.2
+ARG OTP_VERSION=28.0.1
+ARG DEBIAN_VERSION=bookworm-20250520-slim
+
+ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
+ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
+
+# ==================== build stage ====================
+FROM ${BUILDER_IMAGE} AS builder
+
+ARG MIX_ENV=prod
+ENV MIX_ENV="${MIX_ENV}"
+
+RUN apt-get update -y && \
+    apt-get install -y build-essential git && \
+    apt-get clean && \
+    rm -f /var/lib/apt/lists/*_*
+
+WORKDIR /app
+
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+ENV MIX_BUILD_DEPS=true
+ENV MIX_QUIET=true
+
+COPY mix.exs mix.lock ./
+RUN mix deps.get --only $MIX_ENV
+
+COPY config config
+RUN mix deps.compile
+
+COPY lib lib
+COPY priv priv
+COPY assets assets
+COPY rel rel
+
+RUN mix assets.deploy 2>/dev/null || true
+RUN mix compile
+
+COPY config/runtime.exs config/
+
+RUN mix release
+
+# ==================== runner stage ====================
+FROM ${RUNNER_IMAGE} AS runner
+
+ARG MIX_ENV=prod
+ENV MIX_ENV="${MIX_ENV}"
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+      libstdc++6 \
+      openssl \
+      libncurses6 \
+      locales \
+      ca-certificates \
+      tini \
+    && apt-get clean \
+    && rm -f /var/lib/apt/lists/*_*
+
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+WORKDIR /app
+
+RUN chown -R nobody:root /app
+USER nobody
+
+COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/message_app ./
+
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+ENV PHX_SERVER=true
+ENV PORT=4000
+
+EXPOSE 4000
+
+ENTRYPOINT ["/tini", "--"]
+CMD ["/app/entrypoint.sh"]

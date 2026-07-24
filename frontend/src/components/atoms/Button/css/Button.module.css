@@ -1,0 +1,29 @@
+@reference "tailwindcss";
+
+.button {
+  @apply rounded-lg cursor-pointer transition-opacity inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.primary {
+  @apply bg-black text-white border-none;
+}
+
+.secondary {
+  @apply bg-white text-black border border-black;
+}
+
+.ghost {
+  @apply bg-transparent text-black border border-black hover:bg-gray-100;
+}
+
+.sm {
+  @apply px-3 py-1.5 text-[13px];
+}
+
+.md {
+  @apply px-4 py-2 text-sm;
+}
+
+.lg {
+  @apply px-5 py-2.5 text-base;
+}

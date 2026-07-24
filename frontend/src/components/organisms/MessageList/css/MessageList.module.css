@@ -1,0 +1,33 @@
+@reference "tailwindcss";
+
+.list {
+  @apply flex-1 overflow-y-auto flex flex-col py-4 px-[60px] gap-[2px] bg-gray-100 scroll-pt-[60px];
+  position: relative;
+}
+
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 3px;
+}
+
+.loadingTop {
+  @apply flex items-center justify-center py-3 text-sm text-[var(--text-muted)];
+}
+
+.newMessagesBtn {
+  @apply fixed bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full bg-white text-sm font-medium text-gray-700 shadow-lg border border-gray-200 cursor-pointer transition-all hover:bg-gray-50 z-10;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

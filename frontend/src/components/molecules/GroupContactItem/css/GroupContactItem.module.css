@@ -1,0 +1,25 @@
+@reference "tailwindcss";
+
+.item {
+  @apply flex items-center gap-[14px] py-2.5 border-b border-[var(--bg-secondary)] cursor-pointer last:border-b-0;
+}
+
+.info {
+  @apply flex-1 min-w-0;
+}
+
+.name {
+  @apply font-medium text-[15px] text-[var(--text-primary)];
+}
+
+.checkbox {
+  @apply w-6 h-6 border-2 border-[var(--border-color)] rounded-full flex items-center justify-center shrink-0 transition-[background,border-color] text-transparent;
+}
+
+.checked {
+  @apply bg-[var(--border-color)] border-[var(--border-color)] text-[var(--bg-primary)];
+}
+
+.disabled {
+  @apply opacity-40 cursor-not-allowed;
+}

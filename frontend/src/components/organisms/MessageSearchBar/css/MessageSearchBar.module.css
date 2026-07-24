@@ -1,0 +1,25 @@
+@reference "tailwindcss";
+
+.searchBar {
+  @apply flex items-center gap-2.5 px-4 py-2.5 bg-white border-b border-black;
+}
+
+.closeBtn {
+  @apply bg-none border-none cursor-pointer text-black p-1.5 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100;
+}
+
+.inputWrapper {
+  @apply flex-1;
+}
+
+.counter {
+  @apply text-[13px] text-gray-400 whitespace-nowrap min-w-[40px] text-center;
+}
+
+.navButtons {
+  @apply flex gap-[2px];
+}
+
+.navBtn {
+  @apply bg-none border border-black cursor-pointer text-black p-1.5 rounded-md flex items-center justify-center transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent;
+}

@@ -1,0 +1,45 @@
+@reference "tailwindcss";
+
+.overlay {
+  @apply fixed inset-0 bg-[var(--overlay-bg)] flex items-center justify-center z-[1000];
+}
+
+.modal {
+  @apply w-[var(--modal-width)] h-[var(--modal-height)] bg-[var(--bg-primary)] rounded-[var(--border-radius-md)] border border-[var(--border-color)] flex flex-col overflow-hidden;
+}
+
+.header {
+  @apply flex items-center justify-between px-5 py-4 border-b border-[var(--border-color)];
+}
+
+.title {
+  @apply text-lg font-bold text-[var(--text-primary)] m-0;
+}
+
+.headerActions {
+  @apply flex items-center gap-2;
+}
+
+.closeBtn {
+  @apply bg-none border-none cursor-pointer text-[var(--text-primary)] p-1.5 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--bg-secondary)];
+}
+
+.searchWrapper {
+  @apply px-5 py-3 border-b border-[var(--border-color)];
+}
+
+.listContainer {
+  @apply flex-1 overflow-y-auto px-5;
+}
+
+.group {
+  @apply mb-2;
+}
+
+.letterHeader {
+  @apply text-sm font-bold text-[var(--text-primary)] pt-3 pb-1.5 px-0;
+}
+
+.emptyState {
+  @apply flex items-center justify-center h-full text-[var(--text-muted)] text-sm;
+}

@@ -1,0 +1,42 @@
+# If you use Nix:
+# .nix-hex/
+# .nix-mix/
+
+# Phoenix ignored files:
+/assets/node_modules/
+
+# Generated on crash reports:
+erl_crash.dump
+
+# In case you use Node.js/CLI tools for e.g. GraphQL codegen:
+/assets/ts/graphql/
+
+# Dialyzer ignores
+/dialyzer/
+
+# Dependencies
+/deps/
+
+# Build artifacts
+/_build/
+
+# Database
+*.db
+*.sqlite
+
+# Environment files
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml

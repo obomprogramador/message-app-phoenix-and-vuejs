@@ -1,0 +1,17 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply flex flex-col gap-2.5;
+}
+
+.label {
+  @apply text-sm font-medium text-[var(--text-primary)];
+}
+
+.inputWrapper {
+  @apply gap-2.5;
+}
+
+.badges {
+  @apply flex flex-wrap gap-2 max-h-[90px] overflow-y-auto;
+}

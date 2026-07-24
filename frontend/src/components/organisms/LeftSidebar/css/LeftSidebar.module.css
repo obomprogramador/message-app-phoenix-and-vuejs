@@ -1,0 +1,29 @@
+@reference "tailwindcss";
+
+.sidebar {
+  @apply w-[var(--sidebar-width)] min-w-[var(--sidebar-width)] h-full flex flex-col border-r border-[var(--border-color)] bg-[var(--bg-primary)];
+}
+
+.statusBar {
+  @apply flex items-center gap-2 px-4 py-2 border-t border-[var(--border-color)] text-xs;
+}
+
+.statusDot {
+  @apply w-2 h-2 rounded-full flex-shrink-0;
+}
+
+.connected {
+  @apply bg-green-500;
+}
+
+.reconnecting {
+  @apply bg-yellow-400 animate-pulse;
+}
+
+.disconnected {
+  @apply bg-red-400;
+}
+
+.statusText {
+  @apply text-gray-400;
+}

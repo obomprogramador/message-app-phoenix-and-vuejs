@@ -1,0 +1,6 @@
+@reference "tailwindcss";
+
+.icon {
+  @apply shrink-0;
+  color: inherit;
+}

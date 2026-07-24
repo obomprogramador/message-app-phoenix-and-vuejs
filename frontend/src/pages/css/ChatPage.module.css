@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+.layout {
+  @apply flex w-full h-screen overflow-hidden;
+}
+
+.placeholder {
+  @apply flex-1 flex items-center justify-center bg-[var(--bg-placeholder)] text-[var(--text-secondary)] text-base border-b-[6px] border-[var(--accent-green)];
+}

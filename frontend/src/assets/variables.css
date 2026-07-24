@@ -1,0 +1,20 @@
+:root {
+  --sidebar-width: 340px;
+  --border-color: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-placeholder: #f0f2f5;
+  --text-primary: #000000;
+  --text-secondary: #667781;
+  --text-muted: #999999;
+  --accent-green: #00a884;
+  --dot-online: #25d366;
+  --dot-offline: #999999;
+  --dot-away: #ff9800;
+  --dot-busy: #f44336;
+  --border-radius-sm: 6px;
+  --border-radius-md: 8px;
+  --modal-width: 600px;
+  --modal-height: 900px;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+}

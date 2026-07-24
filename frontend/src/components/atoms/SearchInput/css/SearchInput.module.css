@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply flex items-center gap-3;
+}

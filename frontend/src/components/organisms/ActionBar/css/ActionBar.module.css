@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.bar {
+  @apply flex flex-col gap-2 px-3 py-2 bg-white border-b border-black;
+}
+
+.actions {
+  @apply flex items-center gap-2.5;
+}
+
+.actions > button {
+  @apply flex-1 font-normal;
+}
+
+.actions > button :global(svg) {
+  font-weight: 600;
+}
+
+.actions span {
+  @apply ml-1;
+}

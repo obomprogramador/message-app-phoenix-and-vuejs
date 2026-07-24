@@ -1,0 +1,73 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply flex items-end gap-2 mb-1;
+}
+
+.sent {
+  @apply justify-end;
+}
+
+.received {
+  @apply justify-start;
+}
+
+.avatar {
+  @apply flex-shrink-0 mb-4;
+}
+
+.bubbleContainer {
+  @apply flex flex-col;
+}
+
+.senderName {
+  @apply text-[11px] text-gray-500 mb-0.5 ml-1;
+}
+
+.bubble {
+  @apply max-w-[100%] px-3 py-2 rounded-lg relative break-words;
+}
+
+.received .bubble {
+  @apply bg-white border border-black rounded-tl-none;
+}
+
+.sent .bubble {
+  @apply bg-black text-white rounded-tr-none;
+}
+
+.text {
+  @apply m-0 text-[14.2px] leading-[1.4] text-black;
+}
+
+.sent .text {
+  @apply text-white;
+}
+
+.meta {
+  @apply flex justify-end gap-1 text-[11px] text-gray-400 mt-0.5;
+}
+
+.sent .meta {
+  @apply text-gray-300;
+}
+
+.check {
+  @apply text-gray-400;
+}
+
+.sent .check {
+  @apply text-gray-300;
+}
+
+.read {
+  @apply text-white;
+}
+
+.highlight {
+  @apply bg-yellow-300 text-black py-px px-0.5 rounded-sm;
+}
+
+.activeHighlight {
+  @apply bg-orange-500 text-white;
+}

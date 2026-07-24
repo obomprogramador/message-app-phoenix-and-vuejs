@@ -1,0 +1,18 @@
+@reference "tailwindcss";
+
+.list {
+  @apply flex-1 overflow-y-auto;
+}
+
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 3px;
+}
+
+.loading {
+  @apply flex items-center justify-center py-3 text-sm text-[var(--text-muted)];
+}

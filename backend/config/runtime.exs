@@ -30,6 +30,14 @@ if config_env() == :prod do
 
   config :message_app, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
+  check_origin =
+    case System.get_env("PHX_ALLOWED_ORIGINS") do
+      nil -> false
+      "" -> false
+      origins ->
+        origins |> String.split(",", trim: true) |> Enum.map(&String.trim/1)
+    end
+
   config :message_app, MessageAppWeb.Endpoint,
     server: System.get_env("PHX_SERVER", "false") == "true",
     url: [host: host, port: 443, scheme: "https"],
@@ -38,12 +46,5 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base,
-    check_origin:
-      System.get_env("PHX_ALLOWED_ORIGINS", "")
-      |> String.split(",", trim: true)
-      |> Enum.map(&String.trim/1)
-      |> case do
-        [] -> false
-        origins -> origins
-      end
+    check_origin: check_origin
 end

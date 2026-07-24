@@ -23,7 +23,7 @@ services:
       - key: MIX_ENV
         value: prod
       - key: PHX_HOST
-        value: message-app-backend.onrender.com
+        value: message-app-backend-o3ly.onrender.com
       - key: PORT
         value: "4000"
       - key: POOL_SIZE

@@ -9,6 +9,7 @@ services:
     name: message-app-backend
     runtime: docker
     dockerfilePath: backend/Dockerfile.render
+    dockerContext: backend
     plan: free
     region: oregon
     healthCheckPath: /api/health

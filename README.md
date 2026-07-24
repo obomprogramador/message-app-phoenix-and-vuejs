@@ -110,4 +110,77 @@ https://message-app-frontend-w4bu.onrender.com/47c626fb-7bcd-4aca-89cb-ae6726492
 > **Atencao:** O plano free do Render suspende os servicos apos 15 minutos de inatividade.
 > Se as URLs acima nao estiverem funcionando, entre em contato com o desenvolvedor
 > para reativar o deploy no Render.
+
+## Fluxo de trabalho com Git e Semantic Release
+
+### Branches
+
+```
+develop  (instavel, sem protecao)
+   |
+   | PR (3 aprovacoes obrigatorias)
+   v
+staging  (protegida, coverage >= 80%)
+   |
+   | PR (merge direto)
+   v
+main     (protegida, versao e tags)
+```
+
+| Branch | Protecao | Regras |
+|---|---|---|
+| `develop` | Nenhuma | Branch instavel, commits livres |
+| `staging` | Reforcada | PRs vindos de `develop`, 3 aprovacoes, coverage >= 80%, conversacoes resolvidas |
+| `main` | Moderada | PRs vindos de `staging`, merge direto (sem aprovacao) |
+
+### Fluxo do dia a dia
+
+```bash
+# 1. Crie uma branch a partir de develop
+git checkout develop
+git pull origin develop
+git checkout -b feat/minha-feature
+
+# 2. Faca commits seguindo o padrao conventional commits
+git commit -m "feat: add user avatar upload"
+git commit -m "fix: correct avatar crop size"
+git commit -m "feat: add avatar preview"
+
+# 3. Abra PR de feat/minha-feature -> develop
+#    (PR normal, sem restricoes especiais)
+
+# 4. Quando estiver pronto para subir, va de develop -> staging
+#    PR de develop -> staging (requer 3 aprovacoes)
+
+# 5. Quando estiver pronto para publicar, va de staging -> main
+#    PR de staging -> main (merge direto)
+#    Semantic Release detecta os commits, gera versao, CHANGELOG e tag
+```
+
+### Conventional Commits
+
+O Semantic Release usa o padrao **Conventional Commits** para decidir qual numero da versao incrementar:
+
+```
+<type>: <descricao>
+
+[opcional: corpo com BREAKING CHANGE]
+```
+
+| Tipo | Acao na versao | Exemplo |
+|---|---|---|
+| `feat:` | Minor (`1.0.0` -> `1.1.0`) | `feat: add login with Google` |
+| `fix:` | Patch (`1.0.0` -> `1.0.1`) | `fix: correct button alignment` |
+| `BREAKING CHANGE` | Major (`1.0.0` -> `2.0.0`) | `feat: rewrite auth\n\nBREAKING CHANGE: new token format` |
+
+Outros tipos como `chore:`, `docs:`, `refactor:`, `style:`, `test:` nao disparam release.
+
+### O que acontece ao mergear em main
+
+1. Semantic Release analisa todos os commits do merge
+2. Decide se incrementa **patch**, **minor** ou **major**
+3. Atualiza `backend/mix.exs`, `frontend/package.json` e `package-lock.json`
+4. Gera/atualiza `CHANGELOG.md`
+5. Cria commit de release com `[skip ci]`
+6. Cria a tag (ex: `v1.1.0`) e o GitHub Release
 ```

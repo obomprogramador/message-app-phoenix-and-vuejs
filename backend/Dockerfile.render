@@ -67,7 +67,7 @@ RUN chown -R nobody:root /app
 USER nobody
 
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/message_app ./
-COPY backend/render-entrypoint.sh /app/entrypoint.sh
+COPY render-entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
 ENV PHX_SERVER=true

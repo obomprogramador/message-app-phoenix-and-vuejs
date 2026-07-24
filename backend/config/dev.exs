@@ -5,7 +5,7 @@ config :message_app, MessageAppWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "dev-only-secret-key-base-that-is-long-enough-for-phoenix-to-accept",
+  secret_key_base: System.get_env("SECRET_KEY_BASE", "dev-only-secret-key-base-that-is-long-enough-for-phoenix-to-accept"),
   watchers: []
 
 config :message_app, MessageApp.Repo,

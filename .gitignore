@@ -1,0 +1,49 @@
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Dependencies
+node_modules/
+deps/
+_build/
+
+# Build outputs
+dist/
+dist-ssr/
+*.beam
+*.ez
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+/volumes/
+
+# SSL certificates
+certs/
+
+# Documentation
+*.md
+LICENSE
+
+# Logs
+*.log
+
+# Test coverage
+coverage/
+
+# Dialyzer
+/dialyzer/

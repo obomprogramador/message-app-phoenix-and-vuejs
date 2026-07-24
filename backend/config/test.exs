@@ -2,13 +2,13 @@ import Config
 
 config :message_app, MessageAppWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "test-only-secret-key-base-that-is-long-enough-for-phoenix-to-accept",
+  secret_key_base: System.get_env("SECRET_KEY_BASE", "test-only-secret-key-base-that-is-long-enough-for-phoenix-to-accept"),
   server: false
 
 config :message_app, MessageApp.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: System.get_env("PGHOST") || "localhost",
+  username: System.get_env("PGUSER", "postgres"),
+  password: System.get_env("PGPASSWORD", "postgres"),
+  hostname: System.get_env("PGHOST", "localhost"),
   database: "message_app_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10

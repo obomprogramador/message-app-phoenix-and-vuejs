@@ -1,0 +1,43 @@
+databases:
+  - name: message-app-db
+    databaseName: message_app_prod
+    plan: free
+    postgresMajorVersion: 16
+
+services:
+  - type: web
+    name: message-app-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile.render
+    plan: free
+    region: oregon
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: message-app-db
+          property: connectionString
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: MIX_ENV
+        value: prod
+      - key: PHX_HOST
+        value: message-app-backend.onrender.com
+      - key: PORT
+        value: "4000"
+      - key: POOL_SIZE
+        value: "5"
+
+  - type: static
+    name: message-app-frontend
+    buildCommand: cd frontend && npm ci && npm run build
+    publishPath: frontend/dist
+    plan: free
+    region: oregon
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://message-app-backend.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

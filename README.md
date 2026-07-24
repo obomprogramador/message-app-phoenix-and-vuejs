@@ -6,6 +6,10 @@
 
 Aplicacao de mensagens com Phoenix + Vue 3.
 
+[![Backend CI](https://github.com/obomprogramador/message-app-phoenix-and-vuejs/actions/workflows/backend.yml/badge.svg)](https://github.com/obomprogramador/message-app-phoenix-and-vuejs/actions/workflows/backend.yml)
+[![Frontend CI](https://github.com/obomprogramador/message-app-phoenix-and-vuejs/actions/workflows/frontend.yml/badge.svg)](https://github.com/obomprogramador/message-app-phoenix-and-vuejs/actions/workflows/frontend.yml)
+[![Docker Build](https://github.com/obomprogramador/message-app-phoenix-and-vuejs/actions/workflows/docker.yml/badge.svg)](https://github.com/obomprogramador/message-app-phoenix-and-vuejs/actions/workflows/docker.yml)
+
 ## Pre-requisitos
 
 - Docker

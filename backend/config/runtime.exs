@@ -31,6 +31,7 @@ if config_env() == :prod do
   config :message_app, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :message_app, MessageAppWeb.Endpoint,
+    server: System.get_env("PHX_SERVER", "false") == "true",
     url: [host: host, port: 443, scheme: "https"],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},

@@ -69,18 +69,12 @@ jobs:
         working-directory: backend
 
       - name: Run tests with coverage
-        run: mix coveralls.json > coverage.json
+        run: mix coveralls | tee coverage.txt
         working-directory: backend
 
       - name: Check coverage threshold
         run: |
-          COVERAGE=$(python3 -c "
-import re
-with open('backend/coverage.json') as f:
-    content = f.read()
-m = re.search(r'\"covered_percent\":\s*([\d.]+)', content)
-print(m.group(1))
-")
+          COVERAGE=$(grep '^\[TOTAL\]' coverage.txt | grep -oP '\d+\.\d+')
           echo "Coverage: $COVERAGE%"
           if (( $(echo "$COVERAGE < 80" | bc -l) )); then
             echo "❌ Coverage $COVERAGE% is below the required 80%"

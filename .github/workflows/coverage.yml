@@ -68,16 +68,18 @@ jobs:
         run: mix compile --warnings-as-errors
         working-directory: backend
 
-      - name: Run tests with coverage
-        run: mix coveralls.json
-        working-directory: backend
-
-      - name: Check coverage threshold
+      - name: Run tests and check coverage threshold
         run: |
-          COVERAGE=$(cat backend/cover/excoveralls.json | python3 -c "import sys,json; print(json.load(sys.stdin)['covered_percent'])")
+          mix coveralls 2>&1 | tee /tmp/coverage.txt
+          COVERAGE=$(grep '\[TOTAL\]' /tmp/coverage.txt | awk '{print $2}' | tr -d '%')
           echo "Coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+          if [ -z "$COVERAGE" ]; then
+            echo "❌ Could not determine coverage"
+            exit 1
+          fi
+          if [ "$(echo "$COVERAGE < 80" | bc)" -eq 1 ]; then
             echo "❌ Coverage $COVERAGE% is below the required 80%"
             exit 1
           fi
           echo "✅ Coverage $COVERAGE% meets the 80% threshold"
+        working-directory: backend

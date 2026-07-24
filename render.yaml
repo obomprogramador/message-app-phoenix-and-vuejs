@@ -7,7 +7,7 @@ databases:
 services:
   - type: web
     name: message-app-backend
-    env: docker
+    runtime: docker
     dockerfilePath: backend/Dockerfile.render
     plan: free
     region: oregon
@@ -28,12 +28,11 @@ services:
       - key: POOL_SIZE
         value: "5"
 
-  - type: static
+  - type: web
     name: message-app-frontend
+    runtime: static
     buildCommand: cd frontend && npm ci && npm run build
-    publishPath: frontend/dist
-    plan: free
-    region: oregon
+    staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_BASE_URL
         value: https://message-app-backend.onrender.com/api

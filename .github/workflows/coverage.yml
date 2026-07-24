@@ -69,12 +69,12 @@ jobs:
         working-directory: backend
 
       - name: Run tests with coverage
-        run: mix coveralls.json
+        run: mix coveralls.json > coverage.json
         working-directory: backend
 
       - name: Check coverage threshold
         run: |
-          COVERAGE=$(cat backend/cover/excoveralls.json | python3 -c "import sys,json; print(json.load(sys.stdin)['covered_percent'])")
+          COVERAGE=$(python3 -c "import json; data=json.load(open('backend/coverage.json')); print(data['covered_percent'])")
           echo "Coverage: $COVERAGE%"
           if (( $(echo "$COVERAGE < 80" | bc -l) )); then
             echo "❌ Coverage $COVERAGE% is below the required 80%"

@@ -75,5 +75,5 @@ ENV PORT=4000
 
 EXPOSE 4000
 
-ENTRYPOINT ["/tini", "--"]
+ENTRYPOINT ["/bin/sh"]
 CMD ["/app/entrypoint.sh"]

@@ -22,7 +22,8 @@ defmodule MessageApp.Release do
 
   def seed do
     load_app()
-    Code.eval_file("priv/repo/seeds.exs")
+    priv_dir = Application.app_dir(:message_app, "priv")
+    Path.join(priv_dir, "repo/seeds.exs") |> Code.eval_file()
   end
 
   defp repos do

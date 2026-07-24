@@ -22,8 +22,12 @@ defmodule MessageApp.Release do
 
   def seed do
     load_app()
-    priv_dir = Application.app_dir(:message_app, "priv")
-    Path.join(priv_dir, "repo/seeds.exs") |> Code.eval_file()
+    for repo <- repos() do
+      {:ok, _, _} = Ecto.Migrator.with_repo(repo, fn _ ->
+        priv_dir = Application.app_dir(:message_app, "priv")
+        Path.join(priv_dir, "repo/seeds.exs") |> Code.eval_file()
+      end)
+    end
   end
 
   defp repos do

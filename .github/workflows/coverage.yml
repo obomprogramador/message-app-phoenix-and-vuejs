@@ -1,16 +1,8 @@
-name: Backend CI
+name: Backend Coverage
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "backend/**"
-      - ".github/workflows/backend.yml"
   pull_request:
-    branches: [main, staging]
-    paths:
-      - "backend/**"
-      - ".github/workflows/backend.yml"
+    branches: [staging]
 
 env:
   MIX_ENV: test
@@ -20,7 +12,7 @@ env:
   PGDATABASE: message_app_test
 
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-latest
 
     services:
@@ -76,10 +68,16 @@ jobs:
         run: mix compile --warnings-as-errors
         working-directory: backend
 
-      - name: Run tests
-        run: mix test
+      - name: Run tests with coverage
+        run: mix coveralls.json
         working-directory: backend
 
-      - name: Check formatting
-        run: mix format --check-formatted
-        working-directory: backend
+      - name: Check coverage threshold
+        run: |
+          COVERAGE=$(cat backend/cover/excoveralls.json | python3 -c "import sys,json; print(json.load(sys.stdin)['covered_percent'])")
+          echo "Coverage: $COVERAGE%"
+          if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+            echo "❌ Coverage $COVERAGE% is below the required 80%"
+            exit 1
+          fi
+          echo "✅ Coverage $COVERAGE% meets the 80% threshold"
